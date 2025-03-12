@@ -3,9 +3,10 @@ use utils.nu
 
 # Forcefully opt into building windows
 $env.GODOT_CAN_BUILD_WINDOWS = "true"
-$env.GODOT_SRC_DOTNET_ENABLED = ($env.GODOT_SRC_DOTNET_ENABLED? | default false)
+$env.GODOT_SRC_DOTNET_ENABLED = ($env.GODOT_SRC_DOTNET_ENABLED? | default true)
 $env.GODOT_SRC_DOTNET_USE_SYSTEM = ($env.GODOT_SRC_DOTNET_USE_SYSTEM? | default false)
-$env.GODOT_SRC_PRECISION = ($env.GODOT_SRC_PRECISION? | default "single")
+$env.GODOT_SRC_PRECISION = ($env.GODOT_SRC_PRECISION? | default "double")
+$env.GODOT_SRC_GODOT_EXTRA_SUFFIX = ($env.GODOT_SRC_GODOT_EXTRA_SUFFIX? | default "")
 $env.GODOT_SRC_DXC_VERSION = ($env.GODOT_SRC_DXC_VERSION? | default "v1.8.2403.1")
 $env.GODOT_SRC_DXC_DATE = ($env.GODOT_SRC_DXC_DATE? | default "dxc_2024_03_22")
 $env.GODOT_SRC_GODOT_USE_LLVM = ($env.GODOT_SRC_GODOT_USE_LLVM? | default true)
@@ -688,7 +689,7 @@ export def "gsrc godot build" [
 
     if $config.auto_install_godot {
         if not ($"($config.godot_dir)/LICENSE.txt" | path exists) {
-            git clone --depth 1 https://github.com/godotengine/godot.git $config.godot_dir
+            git clone --depth 1 --branch 4.4-stable-ls https://github.com/Lange-Studios/godot.git $config.godot_dir
         }
     }
 

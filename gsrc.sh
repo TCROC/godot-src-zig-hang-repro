@@ -2,6 +2,8 @@
 
 dir="$( cd "$(dirname "${BASH_SOURCE[0]}")" ; pwd -P )"
 
+export GSRC_SCRIPT=${GSRC_SCRIPT:="$dir/gsrc.nu"}
+
 "$dir/pixi-install.sh"
 # For some reason passing $@ directly does't work, so we assign to an intermediate args
 args=$@
